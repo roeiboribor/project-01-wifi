@@ -1,44 +1,17 @@
-/*
-  WiFi Web Server LED Blink
-
-  A simple web server that lets you blink an LED via the web.
-  This sketch will print the IP address of your WiFi module (once connected)
-  to the Serial Monitor. From there, you can open that address in a web browser
-  to turn on and off the LED_BUILTIN.
-
-  If the IP address of your board is yourAddress:
-  http://yourAddress/H turns the LED on
-  http://yourAddress/L turns it off
-
-  This example is written for a network using WPA encryption. For
-  WEP or WPA, change the WiFi.begin() call accordingly.
-
-  Circuit:
-  * Board with NINA module (Arduino MKR WiFi 1010, MKR VIDOR 4000 and Uno WiFi Rev.2)
-  * LED attached to pin 9
-
-  created 25 Nov 2012
-  by Tom Igoe
-
-  Find the full UNO R4 WiFi Network documentation here:
-  https://docs.arduino.cc/tutorials/uno-r4-wifi/wifi-examples#simple-webserver
- */
-
 #include "WiFiS3.h"
 
 #include "arduino_secrets.h" 
-///////please enter your sensitive data in the Secret tab/arduino_secrets.h
-char ssid[] = SECRET_SSID;        // your network SSID (name)
-char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
-int keyIndex = 0;                 // your network key index number (needed only for WEP)
+char ssid[] = SECRET_SSID; // your network SSID (name)
+char pass[] = SECRET_PASS; // your network password (use for WPA, or use as key for WEP)
+int keyIndex = 0; // your network key index number (needed only for WEP)
 
 int led =  LED_BUILTIN;
 int status = WL_IDLE_STATUS;
 WiFiServer server(80);
 
 void setup() {
-  Serial.begin(9600);      // initialize serial communication
-  pinMode(led, OUTPUT);      // set the LED pin mode
+  Serial.begin(9600); // initialize serial communication
+  pinMode(led, OUTPUT); // set the LED pin mode
 
   // check for the WiFi module:
   if (WiFi.status() == WL_NO_MODULE) {
@@ -62,8 +35,8 @@ void setup() {
     // wait 10 seconds for connection:
     delay(10000);
   }
-  server.begin();                           // start the web server on port 80
-  printWifiStatus();                        // you're connected now, so print out the status
+  server.begin(); // start the web server on port 80
+  printWifiStatus(); // you're connected now, so print out the status
 }
 
 
