@@ -1,8 +1,9 @@
 #ifndef WiFiService_h
 #define WiFiService_h
 
-#include <Arduino.h>
 #include "../../../env.h"
+
+#include <Arduino.h>
 #include "WiFiS3.h"
 
 class WiFiService {
