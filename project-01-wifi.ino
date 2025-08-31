@@ -1,7 +1,7 @@
 #include "WiFiS3.h"
 
 #include "arduino_secrets.h" 
-#include "src/Services/WiFiService.h"
+#include "src/services/WiFiService.h"
 
 int led =  LED_BUILTIN;
 
