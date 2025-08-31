@@ -8,7 +8,7 @@
 
 class WiFiService {
 public:
-    WiFiService(int port);
+    WiFiService();
     int initializeWifiService();
     void handleClientRequests(int ledPin);
 
