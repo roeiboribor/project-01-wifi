@@ -1,10 +1,10 @@
 #include "WiFiService.h"
 #include <string.h> // For strcpy
 
-WiFiService::WiFiService(int port, const char* ssid, const char* pass) : _server(port) {
-    strncpy(_ssid, ssid, sizeof(_ssid) - 1);
+WiFiService::WiFiService(int port) : _server(port) {
+    strncpy(_ssid, SECRET_SSID, sizeof(_ssid) - 1);
     _ssid[sizeof(_ssid) - 1] = '\0';
-    strncpy(_pass, pass, sizeof(_pass) - 1);
+    strncpy(_pass, SECRET_PASS, sizeof(_pass) - 1);
     _pass[sizeof(_pass) - 1] = '\0';
     _keyIndex = 0; // Assuming keyIndex is always 0 for now
 }

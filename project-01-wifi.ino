@@ -1,11 +1,10 @@
 #include "WiFiS3.h"
 
-#include "env.h" 
-#include "app/services/Wifi/WiFiService.h"
+#include "src/services/Wifi/WiFiService.h"
 
 int led =  LED_BUILTIN;
 
-WiFiService wifiService(80, SECRET_SSID, SECRET_PASS);
+WiFiService wifiService(80);
 
 void setup() {
   Serial.begin(9600); // initialize serial communication

@@ -2,11 +2,12 @@
 #define WiFiService_h
 
 #include <Arduino.h>
-#include <WiFiS3.h>
+#include "../../../env.h"
+#include "WiFiS3.h"
 
 class WiFiService {
 public:
-    WiFiService(int port, const char* ssid, const char* pass);
+    WiFiService(int port);
     int initializeWifiService();
     void handleClientRequests(int ledPin);
 
