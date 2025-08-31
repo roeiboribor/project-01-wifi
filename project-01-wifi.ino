@@ -9,7 +9,7 @@ WiFiService wifiService;
 SupabaseService supabaseService;
 
 void setup() {
-  Serial.begin(115200); // initialize serial communication
+  Serial.begin(9600); // initialize serial communication
   pinMode(led, OUTPUT); // set the LED pin mode
 
   wifiService.initializeWifiService();
