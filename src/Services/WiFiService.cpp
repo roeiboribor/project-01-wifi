@@ -56,7 +56,6 @@ int WiFiService::initializeWifiService() {
   status = _connectToWiFi(status);
   _server.begin(); // Start the web server after connection
   _printWifiStatus();
-  return status;
 }
 
 void WiFiService::handleClientRequests(int ledPin) {
