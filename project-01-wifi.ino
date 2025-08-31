@@ -1,7 +1,7 @@
 #include "WiFiS3.h"
 
 #include "env.h" 
-#include "src/services/Wifi/WiFiService.h"
+#include "app/services/Wifi/WiFiService.h"
 
 int led =  LED_BUILTIN;
 
