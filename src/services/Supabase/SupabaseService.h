@@ -17,11 +17,12 @@ public:
   const char* getSupabaseProjectUrl();
   const char* getSupabaseAnonPublic();
   const char* getSupabaseSecret();
-  SupabaseResponse getActiveTrolleyLocations();
+  SupabaseResponse get(String tableName, String queryString = ""); // New generic GET function
 
 private:
   WiFiSSLClient client;
   R4HttpClient http;
+  // SupabaseResponse executeSupabaseGet(String endpoint); // Removed: Logic moved to get()
 };
 
 #endif
