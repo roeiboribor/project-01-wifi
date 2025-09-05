@@ -17,26 +17,9 @@ void setup() {
 
   // Fetch and parse trolley data every 2 seconds
   SupabaseResponse trolley = supabaseService.get("trollies", "select=trolley_name,rows,columns&limit=1");
-  Serial.println("Single Trolley: ");
-  Serial.println(trolley.responseBody);
-  
   Trolley parsedTrolley = trolleyService.parseTrolleyData(trolley.responseBody);
-
-  const String trolley_name = parsedTrolley.trolley_name;
   const int rows = parsedTrolley.rows;
   const int columns = parsedTrolley.columns;
-  
-  Serial.println("Parsed Trolley Data:");
-  Serial.print("  Name: ");
-  Serial.println(trolley_name);
-  Serial.print("  Rows: ");
-  Serial.println(rows);
-  Serial.print("  Columns: ");
-  Serial.println(columns);
-  
-  Serial.println("Response code: " + String(trolley.statusCode));
-
-  // Initialize/Update LED matrix service with fetched data
   ledMatrixService.initialize(rows, columns); // This also calls turnOnGrid
 }
 
