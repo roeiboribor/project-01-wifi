@@ -6,17 +6,16 @@
 #include "src/services/Trolley/TrolleyService.h"
 
 WiFiService wifiService;
-SupabaseService supabaseService;
 LEDMatrixService ledMatrixService;
+SupabaseService supabaseService;
 TrolleyService trolleyService;
 
 void setup() {
-  Serial.begin(115200); // initialize serial communication
+  Serial.begin(115200);
 
   wifiService.initializeWifiService();
-}
 
-void loop() {
+  // Fetch and parse trolley data every 2 seconds
   SupabaseResponse trolley = supabaseService.get("trollies", "select=trolley_name,rows,columns&limit=1");
   Serial.println("Single Trolley: ");
   Serial.println(trolley.responseBody);
@@ -37,11 +36,12 @@ void loop() {
   
   Serial.println("Response code: " + String(trolley.statusCode));
 
-  // Update the LED matrix service with dynamic rows and columns
+  // Initialize/Update LED matrix service with fetched data
   ledMatrixService.initialize(rows, columns); // This also calls turnOnGrid
-  // ledMatrixService.turnOnGrid(rows, columns); // Called inside initialize
+}
 
-  delay(10000); // Wait for 10 seconds before the next check
+void loop() {
+  // Code Here...
 }
 
 
