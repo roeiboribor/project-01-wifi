@@ -5,13 +5,19 @@
 
 #include <R4HttpClient.h>
 #include <WiFiS3.h>
+
+struct SupabaseResponse {
+  int statusCode;
+  String responseBody;
+};
+
 class SupabaseService {
 public:
   void initializeSupabaseService();
   const char* getSupabaseProjectUrl();
   const char* getSupabaseAnonPublic();
   const char* getSupabaseSecret();
-  void printAllSupabaseCredentials();
+  SupabaseResponse getActiveTrolleyLocations();
 
 private:
   WiFiSSLClient client;

@@ -25,8 +25,9 @@ void WiFiService::_checkFirmwareVersion() {
 
 int WiFiService::_connectToWiFi(int currentStatus) {
   while (currentStatus != WL_CONNECTED) {
-    Serial.print("Attempting to connect to Network named: ");
-    Serial.println(_ssid);
+    Serial.print("Attempting to connect to Network...");
+    // Serial.print("Attempting to connect to Network named: ");
+    // Serial.println(_ssid);
     currentStatus = WiFi.begin(_ssid, _pass);
     delay(10000);
   }
@@ -34,19 +35,20 @@ int WiFiService::_connectToWiFi(int currentStatus) {
 }
 
 void WiFiService::_printWifiStatus() {
-  Serial.print("SSID: ");
-  Serial.println(WiFi.SSID());
+  // Serial.print("SSID: ");
+  // Serial.println(WiFi.SSID());
 
-  IPAddress ip = WiFi.localIP();
-  Serial.print("IP Address: ");
-  Serial.println(ip);
+  // IPAddress ip = WiFi.localIP();
+  // Serial.print("IP Address: ");
+  // Serial.println(ip);
 
-  long rssi = WiFi.RSSI();
-  Serial.print("signal strength (RSSI):");
-  Serial.print(rssi);
-  Serial.println(" dBm");
-  Serial.print("To see this page in action, open a browser to http://");
-  Serial.println(ip);
+  // long rssi = WiFi.RSSI();
+  // Serial.print("signal strength (RSSI):");
+  // Serial.print(rssi);
+  // Serial.println(" dBm");
+  // Serial.print("To see this page in action, open a browser to http://");
+  // Serial.println(ip);
+  Serial.println("WiFi Connected!");
 }
 
 int WiFiService::initializeWifiService() {

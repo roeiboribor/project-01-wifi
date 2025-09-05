@@ -2,11 +2,15 @@
 #include "../../../env.h"
 
 void SupabaseService::initializeSupabaseService() {
-  printAllSupabaseCredentials();
+  SupabaseResponse response = getActiveTrolleyLocations();
+  Serial.println("Trolley Locations: ");
+  Serial.println(response.responseBody);
+  Serial.println("Response code: " + String(response.statusCode));
+}
 
-  String path = "/rest/v1/" + String(SUPABASE_TABLE_NAME) + "?select=*&is_active=eq.true";
-  String url = String(getSupabaseProjectUrl()) + path;
-  Serial.println("Making GET request to: " + url);
+SupabaseResponse SupabaseService::getActiveTrolleyLocations() {
+  String url = String(getSupabaseProjectUrl()) + "/rest/v1/trolly_locations?select=*&is_active=eq.true";
+  Serial.println("Get Active Trolley Locations!");
 
   http.begin(client, url, 443);
   http.setTimeout(5000);
@@ -15,16 +19,16 @@ void SupabaseService::initializeSupabaseService() {
   http.addHeader("User-Agent: Arduino UNO R4 WiFi");
   http.addHeader("Connection: close");
 
-  int responseNum = http.GET();
-  if (responseNum > 0) {
-    String responseBody = http.getBody();
-    Serial.println("Supabase Response: " + responseBody);
-    Serial.println("Response code: " + String(responseNum));
+  SupabaseResponse response;
+  response.statusCode = http.GET();
+  if (response.statusCode > 0) {
+    response.responseBody = http.getBody();
   } else {
-    Serial.println("Supabase Request Failed: " + String(responseNum));
+    response.responseBody = "Supabase Request Failed!";
   }
 
   http.close();
+  return response;
 }
 
 const char* SupabaseService::getSupabaseProjectUrl() {
@@ -37,10 +41,4 @@ const char* SupabaseService::getSupabaseAnonPublic() {
 
 const char* SupabaseService::getSupabaseSecret() {
   return SUPABASE_SECRET;
-}
-
-void SupabaseService::printAllSupabaseCredentials() {
-  Serial.println("SUPABASE_PROJECT_URL: " + String(getSupabaseProjectUrl()));
-  Serial.println("SUPABASE_ANON_PUBLIC: " + String(getSupabaseAnonPublic()));
-  Serial.println("SUPABASE_SECRET: " + String(getSupabaseSecret()));
 }
