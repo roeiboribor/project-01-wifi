@@ -7,16 +7,16 @@
 class LEDMatrixService {
 public:
     LEDMatrixService();
-    void initialize();
-    void turn4x5On();
-    void turn4x5Off();
-    void set4x5Pixel(int row, int col, bool state);
+    void initialize(int rows, int columns);
+    void turnOnGrid(int rows, int columns);
+    void turnOffGrid(int rows, int columns);
+    void setPixel(int row, int col, bool state);
 
 private:
     ArduinoLEDMatrix _matrix;
     uint8_t _displayGrid[8][12]; // Represents the 12x8 LED matrix
-    const int _numRows = 4;
-    const int _numCols = 5;
+    int _numRows = 4;
+    int _numCols = 5;
 };
 
 #endif

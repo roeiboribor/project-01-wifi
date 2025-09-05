@@ -27,18 +27,22 @@ void setup() {
   
   Trolley parsedTrolley = trolleyService.parseTrolleyData(trolley.responseBody);
 
+  const String trolley_name = parsedTrolley.trolley_name;
+  const int rows = parsedTrolley.rows;
+  const int columns = parsedTrolley.columns;
+  
   Serial.println("Parsed Trolley Data:");
   Serial.print("  Name: ");
-  Serial.println(parsedTrolley.trolley_name);
+  Serial.println(trolley_name);
   Serial.print("  Rows: ");
-  Serial.println(parsedTrolley.rows);
+  Serial.println(rows);
   Serial.print("  Columns: ");
-  Serial.println(parsedTrolley.columns);
+  Serial.println(columns);
   
   Serial.println("Response code: " + String(trolley.statusCode));
 
   // Initialize the LED matrix service
-  ledMatrixService.initialize();
+  ledMatrixService.initialize(rows, columns);
 }
 
 void loop() {
