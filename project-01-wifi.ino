@@ -14,13 +14,9 @@ void setup() {
   Serial.begin(115200); // initialize serial communication
 
   wifiService.initializeWifiService();
+}
 
-  // Example usage of the new generic get method
-  SupabaseResponse locations = supabaseService.get("trolly_locations", "select=*&is_active=eq.true");
-  Serial.println("Trolley Locations: ");
-  Serial.println(locations.responseBody);
-  Serial.println("Response code: " + String(locations.statusCode));
-
+void loop() {
   SupabaseResponse trolley = supabaseService.get("trollies", "select=trolley_name,rows,columns&limit=1");
   Serial.println("Single Trolley: ");
   Serial.println(trolley.responseBody);
@@ -41,11 +37,11 @@ void setup() {
   
   Serial.println("Response code: " + String(trolley.statusCode));
 
-  // Initialize the LED matrix service
-  ledMatrixService.initialize(rows, columns);
-}
+  // Update the LED matrix service with dynamic rows and columns
+  ledMatrixService.initialize(rows, columns); // This also calls turnOnGrid
+  // ledMatrixService.turnOnGrid(rows, columns); // Called inside initialize
 
-void loop() {
+  delay(10000); // Wait for 10 seconds before the next check
 }
 
 
