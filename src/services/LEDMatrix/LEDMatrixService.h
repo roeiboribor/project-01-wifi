@@ -11,6 +11,7 @@ public:
     void turnOnGrid(int rows, int columns);
     void turnOffGrid(int rows, int columns);
     void setPixel(int row, int col, bool state);
+    void updateDimensions(int newRows, int newColumns);
 
 private:
     ArduinoLEDMatrix _matrix;

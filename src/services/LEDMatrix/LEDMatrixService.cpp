@@ -14,7 +14,7 @@ void LEDMatrixService::initialize(int rows, int columns) {
     _numCols = columns;
     _matrix.begin();
     Serial.println("LEDMatrixService initialized.");
-    turnOnGrid(rows, columns); // Turn on the grid by default
+    // Removed: turnOnGrid(rows, columns); // Turn on the grid by default
 }
 
 void LEDMatrixService::turnOnGrid(int rows, int columns) {
@@ -28,8 +28,8 @@ void LEDMatrixService::turnOnGrid(int rows, int columns) {
 }
 
 void LEDMatrixService::turnOffGrid(int rows, int columns) {
-    for (int r = 0; r < _numRows; r++) {
-        for (int c = 0; c < _numCols; c++) {
+    for (int r = 0; r < 8; r++) { // Iterate through the full 8 rows
+        for (int c = 0; c < 12; c++) { // Iterate through the full 12 columns
             _displayGrid[r][c] = 0; // Set to OFF
         }
     }
@@ -50,4 +50,13 @@ void LEDMatrixService::setPixel(int row, int col, bool state) {
     } else {
         Serial.println("Error: Pixel coordinates out of grid bounds.");
     }
+}
+
+void LEDMatrixService::updateDimensions(int newRows, int newColumns) {
+    _numRows = newRows;
+    _numCols = newColumns;
+    Serial.print("LEDMatrixService dimensions updated to ");
+    Serial.print(_numRows);
+    Serial.print("x");
+    Serial.println(_numCols);
 }
